@@ -75,7 +75,38 @@ tracker_controllers:
       #  trajectory: *trajectory_pos_constraint
 
     stop_trajectory_duration: 1.0
+    
+    
+  sensor_head_traj_controller:
+    type: "effort_controllers/JointTrajectoryController"
+    joints:
+      - camera/z
+      - camera/y
+      #- arm_joint_4
 
+    gains: # Required because we're controlling an effort interface
+      camera/z: {p: &kp_sensor_head 100,  d: &kd_sensor_head 1, i: *ki_default, i_clamp: *ki__clamp_default}
+      camera/y: {p: *kp_sensor_head,  d: *kd_sensor_head, i: *ki_default, i_clamp: *ki__clamp_default}
+      #arm_joint_4: {p: 6000      ,  d: *kd_default , i: *ki_default, i_clamp: *ki__clamp_default}
+
+    constraints:
+      goal_time: *goal_time_constraint
+      stopped_velocity_tolerance: 1.0
+      camera/z:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      camera/y:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+
+    stop_trajectory_duration: 1.0    
+
+    
+  spin_lidar_spin_joint_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: spin_lidar_spin_joint
+    pid: {p: 0.4, i: 0.0, d: 0.0}    
+    
   #flipper_traj_controller:
   #    type: "effort_controllers/JointTrajectoryController"
   #    joints:
