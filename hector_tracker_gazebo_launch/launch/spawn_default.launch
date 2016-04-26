@@ -35,15 +35,22 @@
   
   
   <!--Required due to https://github.com/ros-simulation/gazebo_ros_pkgs/issues/313-->
-  <!--
-  <node pkg="vigir_lidar_intensity_modifier" type="laser_intensity_modifier_node" name="front_laser_intensity_modifier_node">
-    <remap from="scan" to="/front_spinning_lidar/scan_gazebo" />
-    <remap from="scan_out" to="/front_spinning_lidar/scan" />      
+  <node pkg="vigir_lidar_intensity_modifier" type="laser_intensity_modifier_node" name="stab_laser_intensity_modifier_node">
+    <remap from="scan" to="/stab_laser/scan_gazebo" />
+    <remap from="scan_out" to="/stab_laser/scan" />      
   </node>
-  -->
+  
+  <node pkg="vigir_lidar_intensity_modifier" type="laser_intensity_modifier_node" name="spin_laser_intensity_modifier_node">
+    <remap from="scan" to="/spin_laser/scan_gazebo" />
+    <remap from="scan_out" to="/spin_laser/scan" />      
+  </node>
+
+  
+  <node pkg="topic_tools" type="relay" name="relay_joint_states" args="/tracker_controllers/joint_states /joint_states" />
   
   <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /tracker_controllers/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
-      
+
+
   
 </launch>
   
