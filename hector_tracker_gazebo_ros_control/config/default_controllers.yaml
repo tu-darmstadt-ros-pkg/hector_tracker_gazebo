@@ -46,7 +46,6 @@ tracker_controllers:
       - arm_joint_1
       - arm_joint_2
       - arm_joint_3
-      #- arm_joint_4
 
     gains: # Required because we're controlling an effort interface
       arm_joint_0: {p: &kp_default 16000,  d: &kd_default 5.0, i: &ki_default 2, i_clamp: &ki__clamp_default 2}
@@ -75,7 +74,30 @@ tracker_controllers:
       #  trajectory: *trajectory_pos_constraint
 
     stop_trajectory_duration: 1.0
+
+  gripper_roll_traj_controller:
+    type: "effort_controllers/JointTrajectoryController"
+    joints:
+      - arm_joint_4
+
+    gains: # Required because we're controlling an effort interface
+      arm_joint_4: {p: &kp_gripper_roll 50,  d: &kd_gripper_roll 0.2, i: *ki_default, i_clamp: *ki__clamp_default}
+      #arm_joint_4: {p: 6000      ,  d: *kd_default , i: *ki_default, i_clamp: *ki__clamp_default}
+
+    constraints:
+      goal_time: *goal_time_constraint
+      stopped_velocity_tolerance: 1.0
+      arm_joint_4:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+
+    stop_trajectory_duration: 1.0
     
+    
+  gripper_roll_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: arm_joint_4
+    pid: {p: 0.4, i: 0.0, d: 0.0}      
     
   sensor_head_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
@@ -92,10 +114,10 @@ tracker_controllers:
     constraints:
       goal_time: *goal_time_constraint
       stopped_velocity_tolerance: 1.0
-      camera/z:
+      sensor_head_yaw_joint:
         goal: *goal_pos_constraint
         trajectory: *trajectory_pos_constraint
-      camera/y:
+      sensor_head_pitch_joint:
         goal: *goal_pos_constraint
         trajectory: *trajectory_pos_constraint
 

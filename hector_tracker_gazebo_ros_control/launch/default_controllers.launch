@@ -8,8 +8,14 @@
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="tracker_controllers"
-    args="joint_state_controller arm_traj_controller sensor_head_traj_controller stab_laser_traj_controller spin_lidar_spin_joint_velocity_controller"/>
+    args="joint_state_controller arm_traj_controller gripper_roll_traj_controller sensor_head_traj_controller stab_laser_traj_controller spin_lidar_spin_joint_velocity_controller"/>
 
+  
+   <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="tracker_controllers"
+    args="--stopped gripper_roll_velocity_controller"/>
+
+  
 
   <!-- convert joint states to TF transforms for rviz, etc -->
 <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
