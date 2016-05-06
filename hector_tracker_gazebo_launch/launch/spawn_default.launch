@@ -50,6 +50,8 @@
   
   <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /tracker_controllers/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
 
+  <!--Nodelet managers. Started as part of bringup on real robot. -->  
+  <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>
 
   
 </launch>
