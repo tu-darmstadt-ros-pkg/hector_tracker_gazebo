@@ -126,8 +126,9 @@ tracker_controllers:
   stab_laser_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
-      - stab_laser_pitch_joint
       - stab_laser_roll_joint
+      - stab_laser_pitch_joint
+      
       #- arm_joint_4
 
     gains: # Required because we're controlling an effort interface
