@@ -1,0 +1,8 @@
+gazebo_ros_control:
+  pid_gains:
+    gripper_joint_1:
+      p: 50.0
+    gripper_joint_1_1:
+      p: 50.0
+    gripper_joint_0_1:
+      p: 50.0

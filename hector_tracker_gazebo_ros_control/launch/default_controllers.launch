@@ -16,6 +16,8 @@
     args="--stopped gripper_roll_velocity_controller gripper_grasp_effort_controller"/>
 
   
+   <rosparam file="$(find hector_tracker_gazebo_ros_control)/config/default_mimic_pids.yaml" command="load"/>   
+   
 
   <!-- convert joint states to TF transforms for rviz, etc -->
 <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
