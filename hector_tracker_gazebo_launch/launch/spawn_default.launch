@@ -27,7 +27,7 @@
   <!-- start robot state publisher -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />
-    <remap from="joint_states" to="/tracker_controllers/joint_states" />
+    <!--<remap from="joint_states" to="/tracker_controllers/joint_states" />-->
   </node>
   
   <include file="$(find hector_tracker_gazebo_ros_control)/launch/default_controllers.launch"/>
@@ -46,9 +46,9 @@
   </node>
 
   
-  <node pkg="topic_tools" type="relay" name="relay_joint_states" args="/tracker_controllers/joint_states /joint_states" />
+
   
-  <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /tracker_controllers/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
+  <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
 
   <!--Nodelet managers. Started as part of bringup on real robot. -->  
   <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>

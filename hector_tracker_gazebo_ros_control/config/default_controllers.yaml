@@ -1,4 +1,4 @@
-tracker_controllers:
+arm_control:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
@@ -75,6 +75,12 @@ tracker_controllers:
 
     stop_trajectory_duration: 1.0
 
+gripper_roll_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
   gripper_roll_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
@@ -99,7 +105,12 @@ tracker_controllers:
     joint: arm_joint_4
     pid: {p: 0.4, i: 0.0, d: 0.0}
     
-    
+gripper_grasp_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
   gripper_grasp_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
@@ -124,6 +135,11 @@ tracker_controllers:
     joint: gripper_joint_0
     #pid: {p: 0.4, i: 0.0, d: 0.0}      
     
+sensor_head_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
     
   sensor_head_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
@@ -149,6 +165,12 @@ tracker_controllers:
 
     stop_trajectory_duration: 1.0    
 
+stab_laser_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+    
   stab_laser_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
@@ -174,6 +196,12 @@ tracker_controllers:
 
     stop_trajectory_duration: 1.0     
  
+spin_lidar_control: 
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
   spin_lidar_spin_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: spin_lidar_spin_joint

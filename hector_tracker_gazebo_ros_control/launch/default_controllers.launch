@@ -1,28 +1,60 @@
 <?xml version="1.0"?>
 
 <launch>
-
+  
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find hector_tracker_gazebo_ros_control)/config/default_controllers.yaml" command="load"/>
-
-  <!-- load the controllers -->
+  
+  <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="tracker_controllers"
-    args="joint_state_controller arm_traj_controller gripper_roll_traj_controller sensor_head_traj_controller stab_laser_traj_controller spin_lidar_spin_joint_velocity_controller gripper_grasp_traj_controller"/>
-
+        output="screen" ns="arm_control"
+        args="joint_state_controller arm_traj_controller"/>
   
-   <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="tracker_controllers"
-    args="--stopped gripper_roll_velocity_controller gripper_grasp_effort_controller"/>
-
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="gripper_roll_control"
+        args="joint_state_controller gripper_roll_traj_controller"/>
   
-   <rosparam file="$(find hector_tracker_gazebo_ros_control)/config/default_mimic_pids.yaml" command="load"/>   
-   
-
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="gripper_grasp_control"
+        args="joint_state_controller gripper_grasp_traj_controller"/>
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="sensor_head_control"
+        args="joint_state_controller sensor_head_traj_controller"/>
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="stab_laser_control"
+        args="joint_state_controller stab_laser_traj_controller"/>
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="spin_lidar_control"
+        args="joint_state_controller spin_lidar_spin_joint_velocity_controller"/>
+  
+  
+  <!--Stopped controllers-->
+  <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="gripper_roll_control"
+        args="--stopped gripper_roll_velocity_controller"/>
+  
+  <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="gripper_grasp_control"
+        args="--stopped gripper_grasp_effort_controller"/>
+  
+  
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_arm" args="/arm_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper_roll" args="/gripper_roll_control/joint_states /joint_states" />  
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper_grasp" args="/gripper_grasp_control/joint_states /joint_states" />  
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_stab_laser" args="/stab_laser_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_spin_lidar" args="/spin_lidar_control/joint_states /joint_states" />
+  
+  <rosparam file="$(find hector_tracker_gazebo_ros_control)/config/default_mimic_pids.yaml" command="load"/>   
+  
+  
   <!-- convert joint states to TF transforms for rviz, etc -->
-<!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-    respawn="false" output="screen">
-    <remap from="/joint_states" to="/rrbot/joint_states" />
+  <!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+  respawn="false" output="screen">
+  <remap from="/joint_states" to="/rrbot/joint_states" />
   </node>-->
-
+  
 </launch>
