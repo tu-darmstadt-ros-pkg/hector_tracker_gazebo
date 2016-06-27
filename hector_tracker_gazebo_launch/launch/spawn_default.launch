@@ -21,6 +21,10 @@
         -y $(arg spawn_y_pos)
         -z $(arg spawn_z_pos)
         -Y $(arg spawn_yaw)  
+        -J arm_joint_1 0.06
+        -J arm_joint_2 0.06
+        -J arm_joint_3 0.25
+        -J arm_joint_4 0.353
         -model robot_description_gazebo"
         respawn="false" output="screen" />
   
