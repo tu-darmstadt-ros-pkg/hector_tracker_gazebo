@@ -75,7 +75,7 @@ arm_control:
 
     stop_trajectory_duration: 1.0
 
-gripper_roll_control:
+gripper_control:
 
   joint_state_controller:
     type: joint_state_controller/JointStateController
@@ -105,8 +105,6 @@ gripper_roll_control:
     joint: arm_joint_4
     pid: {p: 0.4, i: 0.0, d: 0.0}
     
-gripper_grasp_control:
-
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50
