@@ -48,8 +48,11 @@
     <remap from="scan" to="/spin_laser/scan_gazebo" />
     <remap from="scan_out" to="/spin_laser/scan" />      
   </node>
-
   
+  
+  <node pkg="tf" type="static_transform_publisher" name="kinect_base_link" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_depth_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="kinect_base_link2" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame  100" />
+
 
   
   <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
