@@ -52,6 +52,9 @@
   
   <node pkg="tf" type="static_transform_publisher" name="kinect_base_link" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_depth_frame 100" />
   <node pkg="tf" type="static_transform_publisher" name="kinect_base_link2" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame  100" />
+  
+  <node pkg="topic_tools" type="relay" name="relay_stab_laser_pitch_joint" args="/stab_laser_pitch_joint/command /stab_laser_control/stab_laser_pitch_joint_position_controller/command" />
+  <node pkg="topic_tools" type="relay" name="relay_stab_laser_roll_joint" args="/stab_laser_roll_joint/command /stab_laser_control/stab_laser_roll_joint_position_controller/command" />
 
 
   

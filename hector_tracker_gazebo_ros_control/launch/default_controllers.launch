@@ -20,7 +20,7 @@
   
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="stab_laser_control"
-        args="joint_state_controller stab_laser_traj_controller"/>
+        args="joint_state_controller stab_laser_pitch_joint_position_controller stab_laser_roll_joint_position_controller"/>
   
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="spin_lidar_control"
@@ -31,6 +31,10 @@
   <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="gripper_control"
         args="--stopped gripper_roll_velocity_controller gripper_grasp_effort_controller"/>
+  
+  <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="stab_laser_control"
+        args="--stopped stab_laser_traj_controller"/>
   
   <node pkg="topic_tools" type="relay" name="relay_joint_states_arm" args="/arm_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper_roll" args="/gripper_control/joint_states /joint_states" />   

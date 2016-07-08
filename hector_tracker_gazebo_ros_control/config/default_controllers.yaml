@@ -192,7 +192,18 @@ stab_laser_control:
         goal: *goal_pos_constraint
         trajectory: *trajectory_pos_constraint
 
-    stop_trajectory_duration: 1.0     
+    stop_trajectory_duration: 1.0
+    
+      # Position Controllers ---------------------------------------
+  stab_laser_pitch_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: stab_laser_pitch_joint
+    pid: {p: *kp_stab_laser, i: *ki_default, d: *kd_stab_laser}
+    
+  stab_laser_roll_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: stab_laser_roll_joint
+    pid: {p: *kp_stab_laser, i: *ki_default, d: *kd_stab_laser}
  
 spin_lidar_control: 
 
