@@ -11,6 +11,10 @@
         args="joint_state_controller arm_traj_controller"/>
   
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="flipper_control"
+        args="joint_state_controller flipper_traj_controller"/>  
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="gripper_control"
         args="joint_state_controller gripper_roll_traj_controller gripper_grasp_traj_controller"/>
   
@@ -37,6 +41,7 @@
         args="--stopped stab_laser_traj_controller"/>
   
   <node pkg="topic_tools" type="relay" name="relay_joint_states_arm" args="/arm_control/joint_states /joint_states" />
+  <node pkg="topic_tools" type="relay" name="relay_joint_states_flipper" args="/flipper_control/joint_states /joint_states" />  
   <node pkg="topic_tools" type="relay" name="relay_joint_states_gripper_roll" args="/gripper_control/joint_states /joint_states" />   
   <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_stab_laser" args="/stab_laser_control/joint_states /joint_states" />
