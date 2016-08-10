@@ -30,11 +30,6 @@
         output="screen" ns="spin_lidar_control"
         args="joint_state_controller spin_lidar_spin_joint_velocity_controller"/>
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-        output="screen" ns="flipper_control"
-        args="joint_state_controller flipper_traj_controller"/>
-
-
   <!--Stopped controllers-->
   <node name="stopped_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="gripper_control"
@@ -50,7 +45,6 @@
   <node pkg="topic_tools" type="relay" name="relay_joint_states_sensor_head" args="/sensor_head_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_stab_laser" args="/stab_laser_control/joint_states /joint_states" />
   <node pkg="topic_tools" type="relay" name="relay_joint_states_spin_lidar" args="/spin_lidar_control/joint_states /joint_states" />
-  <node pkg="topic_tools" type="relay" name="relay_joint_states_flipper" args="/flipper_control/joint_states /joint_states" />
 
   <rosparam file="$(find hector_tracker_gazebo_ros_control)/config/default_mimic_pids.yaml" command="load"/>
 
