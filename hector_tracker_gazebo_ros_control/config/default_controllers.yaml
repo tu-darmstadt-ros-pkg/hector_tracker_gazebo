@@ -122,13 +122,13 @@ gripper_control:
         trajectory: *trajectory_pos_constraint
 
     stop_trajectory_duration: 1.0
-    
-    
+
+
   gripper_roll_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: arm_joint_4
     pid: {p: 0.4, i: 0.0, d: 0.0}
-    
+
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50
@@ -150,19 +150,19 @@ gripper_control:
         trajectory: *trajectory_pos_constraint
 
     stop_trajectory_duration: 1.0
-    
-    
+
+
   gripper_grasp_effort_controller:
     type: effort_controllers/JointEffortController
     joint: gripper_joint_0
-    #pid: {p: 0.4, i: 0.0, d: 0.0}      
-    
+    #pid: {p: 0.4, i: 0.0, d: 0.0}
+
 sensor_head_control:
 
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50
-    
+
   sensor_head_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
@@ -185,20 +185,20 @@ sensor_head_control:
         goal: *goal_pos_constraint
         trajectory: *trajectory_pos_constraint
 
-    stop_trajectory_duration: 1.0    
+    stop_trajectory_duration: 1.0
 
 stab_laser_control:
 
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50
-    
+
   stab_laser_traj_controller:
     type: "effort_controllers/JointTrajectoryController"
     joints:
       - stab_laser_roll_joint
       - stab_laser_pitch_joint
-      
+
       #- arm_joint_4
 
     gains: # Required because we're controlling an effort interface
@@ -238,8 +238,32 @@ spin_lidar_control:
   spin_lidar_spin_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: spin_lidar_spin_joint
-    pid: {p: 0.4, i: 0.0, d: 0.0}    
-    
+    pid: {p: 0.4, i: 0.0, d: 0.0}
+
+
+flipper_control:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  flipper_traj_controller:
+    type: "effort_controllers/JointTrajectoryController"
+    joints:
+      - flipper_joint_0
+
+    gains: # Required because we're controlling an effort interface
+      flipper_joint_0: {p: &kp_flipper 50,  d: &kd_flipper 0.5, i: *ki_default, i_clamp: *ki__clamp_default}
+
+    constraints:
+      goal_time: *goal_time_constraint
+      stopped_velocity_tolerance: 1.0
+      flipper_joint_0:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+
+    stop_trajectory_duration: 1.0
+
   #flipper_traj_controller:
   #    type: "effort_controllers/JointTrajectoryController"
   #    joints:
