@@ -49,16 +49,16 @@
     <remap from="scan_out" to="/spin_laser/scan" />      
   </node>
   
-  
-  <node pkg="tf" type="static_transform_publisher" name="kinect_base_link" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_depth_frame 100" />
-  <node pkg="tf" type="static_transform_publisher" name="kinect_base_link2" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame  100" />
+  <node pkg="tf" type="static_transform_publisher" name="realsense_rgb_frame_pub" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_rgb_frame 100" /> 
+  <node pkg="tf" type="static_transform_publisher" name="realsense_depth_frame_pub" args="0 0 0 0 0 0  /arm_rgbd_cam_link /arm_rgbd_cam_depth_frame 100" />
+  <node pkg="tf" type="static_transform_publisher" name="realsense_depth__optical_frame_pub" args="0 0 0 -1.57 0 -1.57 /arm_rgbd_cam_depth_frame /arm_rgbd_cam_depth_optical_frame  100" />
   
   <node pkg="topic_tools" type="relay" name="relay_stab_laser_pitch_joint" args="/stab_laser_pitch_joint/command /stab_laser_control/stab_laser_pitch_joint_position_controller/command" />
   <node pkg="topic_tools" type="relay" name="relay_stab_laser_roll_joint" args="/stab_laser_roll_joint/command /stab_laser_control/stab_laser_roll_joint_position_controller/command" />
 
 
   
-  <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 3.14 -r 1" />
+  <node pkg="rostopic" type="rostopic" name="lidar_spin_command_pub" args="pub /spin_lidar_control/spin_lidar_spin_joint_velocity_controller/command std_msgs/Float64 0.69 -r 1" />
 
   <!--Nodelet managers. Started as part of bringup on real robot. -->  
   <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>
