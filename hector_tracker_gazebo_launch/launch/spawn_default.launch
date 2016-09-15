@@ -8,10 +8,14 @@
   <arg name="spawn_z_pos" default="0.2" />
   <arg name="spawn_yaw"   default="0" />
   
+  <arg name="error_model" default="false" />
+  
   <!-- send the robot XML to param server -->
   <!-- We use different models for Gazebo and onboard software for flexibility-->
-  <param name="robot_description_gazebo" command="$(find xacro)/xacro.py '$(find hector_tracker_description)/urdf/tracker_default.urdf.xacro'" />
-  <param name="robot_description"        command="$(find xacro)/xacro.py '$(find hector_tracker_description)/urdf/tracker_default.urdf.xacro'" />
+  <param name="robot_description_gazebo" unless="$(arg error_model)" command="$(find xacro)/xacro.py '$(find hector_tracker_description)/urdf/tracker_default.urdf.xacro'" />
+  <param name="robot_description_gazebo" if="$(arg error_model)" command="$(find xacro)/xacro.py '$(find hector_tracker_description)/urdf/tracker_default_with_error.urdf.xacro'" />
+  
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find hector_tracker_description)/urdf/tracker_default.urdf.xacro'" />
   
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
