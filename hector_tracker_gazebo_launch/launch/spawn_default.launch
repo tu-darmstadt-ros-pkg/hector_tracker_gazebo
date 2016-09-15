@@ -55,6 +55,9 @@
   
   <node pkg="topic_tools" type="relay" name="relay_stab_laser_pitch_joint" args="/stab_laser_pitch_joint/command /stab_laser_control/stab_laser_pitch_joint_position_controller/command" />
   <node pkg="topic_tools" type="relay" name="relay_stab_laser_roll_joint" args="/stab_laser_roll_joint/command /stab_laser_control/stab_laser_roll_joint_position_controller/command" />
+  
+  <node pkg="topic_tools" type="relay" name="relay_gripper_cam_to_rect" args="/arm_gripper_cam/image_raw /arm_gripper_cam/image_rect" />
+
 
 
   
