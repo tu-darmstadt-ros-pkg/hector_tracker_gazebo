@@ -65,7 +65,7 @@
 
   <!--Nodelet managers. Started as part of bringup on real robot. -->  
   <node pkg="nodelet" type="nodelet" name="arm_thermal_cam_nodelet_manager" args="manager" output="screen"/>
-  <node pkg="nodelet" type="nodelet" name="arm_rgbd_cam_nodelet_manager" args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="/arm_rgbd_cam/arm_rgbd_cam_nodelet_manager" args="manager" output="screen"/>
   
 </launch>
   
