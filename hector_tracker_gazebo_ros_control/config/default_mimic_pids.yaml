@@ -7,6 +7,6 @@ gazebo_ros_control:
     gripper_joint_0_1:
       p: 50.0
     flipper_joint_0:
-      p: 10000.0
+      p: 1000.0
       i: 0.0
       d: 0.0
