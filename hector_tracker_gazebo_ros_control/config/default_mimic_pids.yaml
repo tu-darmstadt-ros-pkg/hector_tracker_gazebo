@@ -10,3 +10,7 @@ gazebo_ros_control:
       p: 1000.0
       i: 0.0
       d: 0.0
+    left_flipper_joint:
+      p: 1000.0
+      i: 0.0
+      d: 0.0
